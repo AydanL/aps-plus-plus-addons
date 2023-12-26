@@ -1806,12 +1806,6 @@ module.exports = ({ Class }) => {
 				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
 			},
 			{
-				POSITION: [1, 8, 1.2, 10.5, 0, 0, 0],
-			},
-			{
-				POSITION: [1, 4, 1.2, 10.5, 0, 0, 0],
-			},
-			{
 				POSITION: [1, 12, 1, 15, 0, 0, 0],
 				PROPERTIES: {
 					MAX_CHILDREN: 3,
@@ -1822,11 +1816,17 @@ module.exports = ({ Class }) => {
 					SYNCS_SKILLS: true,
 				},
 			},
+			{
+				POSITION: [1, 6, 1.3, 15, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 2, 1.3, 15, 0, 0, 0],
+			},
 		],
 	};
 	Class.spawnMaker = {
 		PARENT: ["genericTank"],
-		LABEL: "Delegator",
+		LABEL: "Enslaver",
 		DANGER: 6,
 		STAT_NAMES: statnames.drone,
 		BODY: {
