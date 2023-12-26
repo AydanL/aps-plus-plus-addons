@@ -9,9 +9,9 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
-	// This addon is disabled by default.
+	// This addon is enabled by default.
 	// You can also disable addons by not making them end with '.js'
-	// If you want to enable, simply make the line below just not run.
+	// If you want to disable, simply make the line below run.
 	// return console.log('[coolSpawnersAddon.js] Addon disabled by default');
 
 	let MAX_CHILDREN = 0,
