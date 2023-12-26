@@ -1826,7 +1826,7 @@ module.exports = ({ Class }) => {
 	};
 	Class.spawnMaker = {
 		PARENT: ["genericTank"],
-		LABEL: "Delegator",
+		LABEL: "Enslaver",
 		DANGER: 6,
 		STAT_NAMES: statnames.drone,
 		BODY: {
