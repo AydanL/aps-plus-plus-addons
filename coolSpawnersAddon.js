@@ -49,6 +49,11 @@ module.exports = ({ Class }) => {
 			for (let key of Object.keys(now)) if (key.startsWith('UPGRADES_TIER_')) next.push(...now[key]);
 		}
 	}
+	// MISCELANEOUS
+	Class.localSquareTurret = {
+		PARENT: "autoTurret",
+		SHAPE: 4,
+	}
 
 	// MINIONS DEFINITIONS
 	Class.twinMinion = {
@@ -1232,6 +1237,142 @@ module.exports = ({ Class }) => {
 			},
 		],
 	};
+	
+	// DRIVE MINIONS
+	Class.localTurretedMinion = makeAuto(Class.minion)
+	Class.turretedTwinMinion = makeAuto(Class.twinMinion)
+	Class.turretedFlankMinion = makeAuto(Class.flankMinion)
+	Class.turretedMachineMinion = makeAuto(Class.machineMinion)
+	Class.turretedTrapperMinion = makeAuto(Class.trapperMinion)
+	Class.turretedDirectorMinion = makeAuto(Class.directorMinion)
+	Class.turretedSniperMinion = makeAuto(Class.sniperMinion)
+	
+	// NECRO MINIONS
+	Class.minionchip = {
+		PARENT: "minion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+		
+	}
+	Class.twinchip = {
+		PARENT: "twinMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+	}
+	Class.directorchip = {
+		PARENT: "directorMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+	}
+	Class.trapperchip = {
+		PARENT: "trapperMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+	}
+	Class.machinechip = {
+		PARENT: "machineMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+	}
+	Class.sniperchip = {
+		PARENT: "sniperMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+	}
+	Class.flankchip = {
+		PARENT: "flankMinion",
+		SHAPE: 4,
+		NECRO: true,
+		HITS_OWN_TYPE: "hard",
+		BODY: {
+			FOV: 0.5,
+			RECOIL_MULTIPLIER: 0,
+		},
+		AI: {
+			BLIND: true,
+			FARMER: true,
+		},
+		DRAW_HEALTH: false,
+		GUNS: [
+			{
+				POSITION: [17, 9, 1, 0, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.minion]),
+					WAIT_TO_CYCLE: true,
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [17, 9, 1, 0, 0, 180, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.minion]),
+					WAIT_TO_CYCLE: true,
+					TYPE: "bullet",
+				},
+			},
+		],
+	}
+	Class.turretedMinionchip = makeAuto(Class.minionchip)
 
 	// TANKS DEFINITIONS
 	// SPAWNER UPGRADES (BASE GAME)
@@ -1430,6 +1571,7 @@ module.exports = ({ Class }) => {
 			},
 		],
 	};
+	
 	// ARMS RACE UPGRADES
 	Class.bentMaker = {
 		PARENT: ["genericTank"],
@@ -2164,15 +2306,663 @@ module.exports = ({ Class }) => {
 		],
 	};
 	
+	// DRIVE-SPAWNERS
+	Class.localSpawnerDrive = {
+		PARENT: ["genericTank"],
+		LABEL: "Spawnerdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "localTurretedMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	}
+	Class.twinDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Generatordrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 3.7, 1, 10.5, 2.5, 0, 0],
+			},
+			{
+				POSITION: [4.5, 3.7, 1, 10.5, -2.5, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedTwinMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.flankDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Pressdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [4.5, 8, 0.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedFlankMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.machineDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Metalworkerdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [4.5, 6, 1.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedMachineMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.trapDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Installerdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [2, 8, 1.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 3,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedTrapperMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.directorDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Hirerdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 3,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedDirectorMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [1, 4, 1.3, 15, 0, 0, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.sniperDriveMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Elitistdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [6.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [13.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 17, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedSniperMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	};
+	Class.localFactoryDrive = {
+		PARENT: ["genericTank"],
+		LABEL: "Factorydrive",
+		DANGER: 7,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		MAX_CHILDREN: 6,
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [5, 11, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [2, 14, 1, 15.5, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.factory]),
+					TYPE: "localTurretedMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [12, 14, 1, 0, 0, 0, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	}
+	Class.localAutoSpawnerDrive = {
+		PARENT: ["genericTank"],
+		LABEL: "Auto-Spawnerdrive",
+		DANGER: 6,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "localTurretedMinion",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "localSquareTurret",
+			},
+		],
+	}
+	
+	// NECRO-SPAWNERS
+	Class.underSpawner = {
+		PARENT: ["genericTank"],
+		LABEL: "Underspawner",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "minionchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+		],
+	}
+	Class.underTwinMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Undergenerator",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 3.7, 1, 10.5, 2.5, 0, 0],
+			},
+			{
+				POSITION: [4.5, 3.7, 1, 10.5, -2.5, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "twinchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+	};
+	Class.underFlankMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Underpress",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [4.5, 8, 0.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 4,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "flankchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+	};
+	Class.underMachineMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Undermetalworker",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [4.5, 6, 1.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "machinechip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+	};
+	Class.underTrapMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Underinstaller",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [2, 8, 1.5, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "trapperchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+	};
+	Class.underDirectorMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Underhirer",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "directorchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [1, 4, 1.3, 15, 0, 0, 0],
+			},
+		],
+	};
+	Class.underSniperMaker = {
+		PARENT: ["genericTank"],
+		LABEL: "Underelitist",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [6.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [13.5, 12, 1, 0, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 17, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "sniperchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+		],
+	};
+	Class.autoUnderSpawner = makeAuto(Class.underSpawner);
+	Class.underFactory = {
+		PARENT: ["genericTank"],
+		LABEL: "Underfactory",
+		DANGER: 7,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		MAX_CHILDREN: 12,
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [5, 11, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [2, 14, 1, 15.5, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.factory]),
+					TYPE: "minionchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [12, 14, 1, 0, 0, 0, 0],
+			},
+		],
+	}
+	Class.underDriveSpawner = {
+		PARENT: ["genericTank"],
+		LABEL: "Underspawnerdrive",
+		DANGER: 6,
+		SHAPE: 4,
+		STAT_NAMES: statnames.drone,
+		BODY: {
+			SPEED: base.SPEED * 0.8,
+			FOV: 1.1,
+		},
+		GUNS: [
+			{
+				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+				POSITION: [4.5, 10, 1, 10.5, 0, 0, 0],
+			},
+			{
+				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 10,
+					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+					TYPE: "turretedMinionchip",
+					STAT_CALCULATOR: gunCalcNames.drone,
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+				},
+			},
+			{
+				POSITION: [11.5, 12, 1, 0, 0, 0, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: "overdriveDeco",
+			},
+		],
+	}
+
+	
+	
 	// END OF DEFINITIONS
-	Class.spawner.UPGRADES_TIER_3.push("twinMaker", "flankMaker", "machineMaker", "trapMaker", "directorMaker", "sniperMaker");
-		Class.twinMaker.UPGRADES_TIER_3 = ["bentMaker", "gunMaker", "doubleMaker", "autoTwinMaker", "twinFactory"];
-		Class.flankMaker.UPGRADES_TIER_3 = ["hexaMaker", "triMaker", "auto3Maker", "autoFlankMaker", "flankFactory"];
-		Class.machineMaker.UPGRADES_TIER_3 = ["sprayMaker", "gunMaker", "machTrapMaker", "autoMachineMaker", "machineFactory"];
-		Class.trapMaker.UPGRADES_TIER_3 = ["triTrapMaker", "buildMaker", "machTrapMaker", "autoTrapMaker", "trapFactory"];
-		Class.directorMaker.UPGRADES_TIER_3 = ["overMaker", "spawnMaker", "cruiserMaker", "autoDirectorMaker", "directorFactory"];
-		Class.sniperMaker.UPGRADES_TIER_3 = ["assassMaker", "huntMaker", "autoSniperMaker", "sniperFactory"];
-	Class.autoSpawner.UPGRADES_TIER_3 != null ? Class.autoSpawner.UPGRADES_TIER_3.push("autoTwinMaker", "autoFlankMaker", "autoMachineMaker", "autoTrapMaker", "autoDirectorMaker", "autoSniperMaker") : Class.autoSpawner.UPGRADES_TIER_3 = ["autoTwinMaker", "autoFlankMaker", "autoMachineMaker", "autoTrapMaker", "autoDirectorMaker", "autoSniperMaker"]
-	Class.factory.UPGRADES_TIER_3 != null ? Class.factory.UPGRADES_TIER_3.push("twinFactory", "flankFactory", "machineFactory", "trapFactory", "directorFactory", "sniperFactory") : Class.factory.UPGRADES_TIER_3 = ["twinFactory", "flankFactory", "machineFactory", "trapFactory", "directorFactory", "sniperFactory"]
+	Class.spawner.UPGRADES_TIER_3.push("twinMaker", "flankMaker", "machineMaker", "trapMaker", "directorMaker", "sniperMaker", "localSpawnerDrive", "underSpawner");
+		Class.twinMaker.UPGRADES_TIER_3 = ["bentMaker", "gunMaker", "doubleMaker", "autoTwinMaker", "twinFactory", "twinDriveMaker", "underTwinMaker"];
+		Class.flankMaker.UPGRADES_TIER_3 = ["hexaMaker", "triMaker", "auto3Maker", "autoFlankMaker", "flankFactory", "flankDriveMaker", "underFlankMaker"];
+		Class.machineMaker.UPGRADES_TIER_3 = ["sprayMaker", "gunMaker", "machTrapMaker", "autoMachineMaker", "machineFactory", "machineDriveMaker", "underMachineMaker"];
+		Class.trapMaker.UPGRADES_TIER_3 = ["triTrapMaker", "buildMaker", "machTrapMaker", "autoTrapMaker", "trapFactory", "trapDriveMaker", "underTrapMaker"];
+		Class.directorMaker.UPGRADES_TIER_3 = ["overMaker", "spawnMaker", "cruiserMaker", "autoDirectorMaker", "directorFactory", "directorDriveMaker", "underDirectorMaker"];
+		Class.sniperMaker.UPGRADES_TIER_3 = ["assassMaker", "huntMaker", "autoSniperMaker", "sniperFactory", "sniperDriveMaker", "underSniperMaker"];
+		Class.localSpawnerDrive.UPGRADES_TIER_3 = ["localFactoryDrive", "twinDriveMaker", "flankDriveMaker", "machineDriveMaker", "trapDriveMaker", "directorDriveMaker", "sniperDriveMaker", "underDriveSpawner", "localAutoSpawnerDrive"];
+		Class.underSpawner.UPGRADES_TIER_3 = ["underFactory", "autoUnderSpawner", "underTwinMaker", "underFlankMaker", "underMachineMaker", "underTrapMaker", "underDirectorMaker", "underSniperMaker", "underDriveSpawner"];
+	Class.autoSpawner.UPGRADES_TIER_3 != null ? Class.autoSpawner.UPGRADES_TIER_3.push("autoTwinMaker", "autoFlankMaker", "autoMachineMaker", "autoTrapMaker", "autoDirectorMaker", "autoSniperMaker", "autoUnderSpawner", "localAutoSpawnerDrive") : Class.autoSpawner.UPGRADES_TIER_3 = ["autoTwinMaker", "autoFlankMaker", "autoMachineMaker", "autoTrapMaker", "autoDirectorMaker", "autoSniperMaker", "autoUnderSpawner", "localAutoSpawnerDrive"]
+	Class.factory.UPGRADES_TIER_3 != null ? Class.factory.UPGRADES_TIER_3.push("twinFactory", "flankFactory", "machineFactory", "trapFactory", "directorFactory", "sniperFactory", "underFactory", "localFactroyDrive") : Class.factory.UPGRADES_TIER_3 = ["twinFactory", "flankFactory", "machineFactory", "trapFactory", "directorFactory", "sniperFactory", "underFactory", "localFactoryDrive"]
 	console.log('[coolSpawnersAddon] Loaded successfully');
 };
