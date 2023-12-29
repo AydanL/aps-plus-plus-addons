@@ -2675,6 +2675,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Underspawner",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2706,6 +2707,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Undergenerator",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of twin square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2740,6 +2742,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Underpress",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of flank-guard square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2774,6 +2777,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Undermetalworker",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of machine-gun square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2808,6 +2812,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Underinstaller",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of trapper square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2842,6 +2847,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Underhirer",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of director square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
@@ -2876,6 +2882,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Underelitist",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "can control an army of sniper square minions!",
 		SHAPE: 4,
 		STAT_NAMES: statnames.drone,
 		BODY: {
