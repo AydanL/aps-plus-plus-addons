@@ -1382,6 +1382,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Generator",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces twin-like minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1415,6 +1416,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Press",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces flank-guard looking minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1448,6 +1450,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Metalworker",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces machine-gun minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1481,6 +1484,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Installer",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Spawns trapper minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1514,6 +1518,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Hirer",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "This one has director minions!",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1547,6 +1552,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Elitist",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces sniper-like minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1579,6 +1585,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Producer",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces tripleshot-like minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1615,6 +1622,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "RTG",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Spawns gunner-like minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1654,6 +1662,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Steelworker",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces sprayer-like minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1690,6 +1699,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Alimenter",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Produces double-twin minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1698,19 +1708,19 @@ module.exports = ({ Class }) => {
 		GUNS: [
 			{
 				/**** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-				POSITION: [4.5, 3.7, 1, 10.5, 2.5, 0, 0],
+				POSITION: [5.5, 3.7, 1, 10.5, 2.5, 0, 0],
 			},
 			{
-				POSITION: [4.5, 3.7, 1, 10.5, -2.5, 0, 0],
+				POSITION: [5.5, 3.7, 1, 10.5, -2.5, 0, 0],
 			},
 			{
-				POSITION: [11.5, 5.5, 1, 0, 3.2, 0, 0],
+				POSITION: [12.5, 5.5, 1, 0, 3.2, 0, 0],
 			},
 			{
-				POSITION: [11.5, 5.5, 1, 0, -3.2, 0, 0],
+				POSITION: [12.5, 5.5, 1, 0, -3.2, 0, 0],
 			},
 			{
-				POSITION: [1, 12, 1, 15, 0, 0, 0],
+				POSITION: [1, 12, 1, 16, 0, 0, 0],
 				PROPERTIES: {
 					MAX_CHILDREN: 4,
 					SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
@@ -1726,6 +1736,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Compressor",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Makes hexatank minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1762,6 +1773,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Missionary",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Has triangle minions",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1795,6 +1807,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Compactor",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Auto-3 minions this time because the funny",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1828,6 +1841,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Updater",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Tri-trapper minions for even more traps",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1864,6 +1878,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Configurer",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Builder minions, an architect on drugs",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1900,6 +1915,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Downloader",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Machine trapper minions, nothing else",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1936,6 +1952,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Delegator",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Controls overseers this time lol",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -1972,6 +1989,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Enslaver",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Holy shit, minions that have minions themselves XD",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -2005,6 +2023,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Mitigator",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Some cool cruiser minions to swarm your opponent",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -2038,6 +2057,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Royalist",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "Assassin minions, that's all",
 		STAT_NAMES: statnames.drone,
 		BODY: {
 			SPEED: base.SPEED * 0.8,
@@ -2071,6 +2091,7 @@ module.exports = ({ Class }) => {
 		PARENT: ["genericTank"],
 		LABEL: "Communist",
 		DANGER: 6,
+		UPGRADE_TOOLTIP: "small hunters as soldiers",
 		CONTROLLERS: ["zoom"],
 		TOOLTIP: "Hold right click to zoom.",
 		STAT_NAMES: statnames.drone,
