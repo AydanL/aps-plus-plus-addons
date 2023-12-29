@@ -52,6 +52,8 @@ module.exports = ({ Class }) => {
 	// MISCELANEOUS
 	Class.localSquareTurret = {
 		PARENT: "autoTurret",
+        INDEPENDENT: true,
+        CONTROLLERS: ["nearestDifferentMaster"],
 		SHAPE: 4,
 	}
 
